@@ -1,11 +1,10 @@
 import sys
 
-from PySide6 import QtCore, QtWidgets, QtGui
+from PySide6 import QtWidgets, QtGui
 
-import counter_app.ui_gen.resources_rc
 from counter_app.ui_gen.ui_MainWindow import Ui_MainWindow
 
-from _version import __version__
+from counter_app._version import __version__
 
 try:
     # Include in try/except block if you're also targeting Mac/Linux
@@ -32,7 +31,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btn_dec.clicked.connect(self.dec)
         self.btn_reset.clicked.connect(self.reset)
 
-        # Show version in the status bar
+        # Show the version in the status bar
         self.statusbar.showMessage(f"Version v{__version__}")
     
     def update_counter(self):

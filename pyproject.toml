@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "counter-app"
-version = "1.0.0"
+version = "1.0.1"
 description = "Standalone app for click counter"
 authors = ["Oleksandr Foia <foia.alexander@gmail.com>"]
 license = "MIT"
@@ -25,9 +25,11 @@ counter-app = "counter_app.main:main"
 [tool.poe.tasks]
 compile-qrc = "pyside6-rcc src/resources/resources.qrc -o src/counter_app/ui_gen/resources_rc.py"
 compile-ui = "pyside6-uic src/ui/mainwindow.ui --import-from counter_app.ui_gen -o src/counter_app/ui_gen/ui_MainWindow.py"
+generate-version = "python tasks/generate_version.py"
 compile-assets = """
 poe compile-qrc
 poe compile-assets
+poe embed-version
 """
 run = "python src/counter_app/main.py"
 lint = "ruff check ."
@@ -36,9 +38,12 @@ ruff check . --fix
 ruff format .
 """
 format = "ruff format ."
-build = "pyinstaller --onefile src/counter_app/main.py --name counter-app"
+installer-build = "pyinstaller --onefile src/counter_app/main.py --name counter-app"
+build = { sequence = [
+    "generate-version",
+    "installer-build"], help = "Build the application" }
 clean = "python tasks/clean.py"
-release = "python tasks/release.py"
+release = "python -m tasks.release tasks/release.py"
 open-designer = "pyside6-designer"
 
 
