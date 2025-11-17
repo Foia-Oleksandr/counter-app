@@ -1,0 +1,9 @@
+/src/counter_app/ui_gen/resources_rc.py
+/src/counter_app/ui_gen/ui_MainWindow.py
+/dist/
+/build/
+/draft/
+/.idea/
+__pycache__/
+/poetry.lock
+/counter-app.spec
