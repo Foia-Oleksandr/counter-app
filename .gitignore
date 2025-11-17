@@ -7,3 +7,4 @@
 __pycache__/
 /poetry.lock
 /counter-app.spec
+/src/counter_app/_version.py

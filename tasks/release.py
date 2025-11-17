@@ -8,28 +8,12 @@ Release automation script:
 
 import subprocess
 import sys
-import tomllib
-from pathlib import Path
 
+from tasks.generate_version import read_poetry_version, embed_version
 
-def embed_version(version: str):
-    """Write a version string into _version.py for runtime use."""
-    target = Path("src/atomistic_transformations/_version.py")
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(f'__version__ = "{version}"\n')
-    print(f"📝 Embedded version {version} into {target}")
 
 def main():
-    pyproject_path = Path("pyproject.toml")
-
-    if not pyproject_path.exists():
-        print("❌ pyproject.toml not found.")
-        sys.exit(1)
-
-    # Read version
-    with open(pyproject_path, "rb") as f:
-        data = tomllib.load(f)
-    version = data["project"]["version"]
+    version = read_poetry_version()
     tag = f"v{version}"
 
     # Embed version before tagging
