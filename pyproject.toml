@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "counter-app"
-version = "1.0.5"
+version = "1.0.6"
 description = "Standalone app for click counter"
 authors = ["Oleksandr Foia <foia.alexander@gmail.com>"]
 license = "MIT"
@@ -23,13 +23,20 @@ prepare-assets = "tasks.release:build_assets"
 counter-app = "counter_app.main:main"
 
 [tool.poe.tasks]
-compile-qrc = "pyside6-rcc src/resources/resources.qrc -o src/counter_app/ui_gen/resources_rc.py"
-compile-ui = "pyside6-uic src/ui/mainwindow.ui --import-from counter_app.ui_gen -o src/counter_app/ui_gen/ui_MainWindow.py"
+compile-qrc = [
+    { cmd = "mkdir -p src/counter_app/ui_gen" },
+    { cmd = "pyside6-rcc src/resources/resources.qrc -o src/counter_app/ui_gen/resources_rc.py" }
+]
+compile-ui = [
+    { cmd = "mkdir -p src/counter_app/ui_gen" },
+    { cmd = "pyside6-uic src/ui/mainwindow.ui --from-imports counter_app.ui_gen -o src/counter_app/ui_gen/ui_MainWindow.py" }
+]
 generate-version = "python tasks/generate_version.py"
-compile-assets = """
-poe compile-qrc
-poe compile-assets
-"""
+compile-assets = { sequence = [
+    "compile-qrc",
+    "compile-ui"
+], help = "Compile resources" }
+clean-build = { sequence = ["clean", "compile-assets", "build"] }
 run = "python src/counter_app/main.py"
 lint = "ruff check ."
 lint_fix = """
