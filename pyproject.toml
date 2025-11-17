@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "counter-app"
-version = "1.0.4"
+version = "1.0.5"
 description = "Standalone app for click counter"
 authors = ["Oleksandr Foia <foia.alexander@gmail.com>"]
 license = "MIT"
@@ -29,7 +29,6 @@ generate-version = "python tasks/generate_version.py"
 compile-assets = """
 poe compile-qrc
 poe compile-assets
-poe embed-version
 """
 run = "python src/counter_app/main.py"
 lint = "ruff check ."

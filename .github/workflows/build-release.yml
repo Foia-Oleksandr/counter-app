@@ -29,9 +29,11 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
+      - name: Compile artifacts
+        run: poetry run poe compile-assets
+
       - name: Build standalone binary
-        run: |
-          poetry run poe build
+        run: poetry run poe build
         shell: bash
 
       - name: Rename artifact
