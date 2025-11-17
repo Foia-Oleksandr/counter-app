@@ -9,7 +9,7 @@ def embed_version(version: str = None):
     target = Path("src/counter_app/_version.py")
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(f'__version__ = "{version}"\n')
-    print(f"📝 Embedded version {version} into {target}")
+    print(f"Embedded version {version} into {target}")
 
 def read_poetry_version(path="pyproject.toml"):
     p = Path(path)
