@@ -4,7 +4,6 @@ __pycache__/
 *.pyd
 
 ui_gen/
-ui_gen/
 /dist/
 /build/
 /poetry.lock
@@ -14,3 +13,7 @@ ui_gen/
 /draft/
 /.idea/
 .vscode/
+/src/web_viewer/package-lock.json
+web_view_gen/
+/src/web_viewer/node_modules/
+/src/web_viewer/web_dist/

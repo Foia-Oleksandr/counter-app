@@ -2,17 +2,10 @@ import sys
 
 from PySide6 import QtWidgets, QtGui
 
+from counter_app.AtomsView import AtomsView
 from counter_app.ui_gen.ui_MainWindow import Ui_MainWindow
 
 from counter_app._version import __version__
-
-try:
-    # Include in try/except block if you're also targeting Mac/Linux
-    from PyQt6.QtWinExtras import QtWin
-    myappid = 'com.learnpyqt.examples.counter'
-    QtWin.setCurrentProcessExplicitAppUserModelID(myappid)    
-except ImportError:
-    pass
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -30,6 +23,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.btn_inc.clicked.connect(self.inc)
         self.btn_dec.clicked.connect(self.dec)
         self.btn_reset.clicked.connect(self.reset)
+
+        self.atomsView = AtomsView(self.atomsViewArea)
 
         # Show the version in the status bar
         self.statusbar.showMessage(f"Version v{__version__}")
