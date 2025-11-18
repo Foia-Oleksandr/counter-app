@@ -46,6 +46,7 @@ lint_fix = [
 format = "ruff format ."
 
 compile-web-assets = [
+    { cmd = "npm install", cwd = "src/web_viewer" },
     { cmd = "npm run build", cwd = "src/web_viewer" },
     { cmd = "mkdir -p src/counter_app/web_view_gen" },
     { cmd = "pyside6-rcc src/web_viewer/web_dist/web_view.qrc -o src/counter_app/web_view_gen/web_rc.py" }
