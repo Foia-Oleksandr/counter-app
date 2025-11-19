@@ -3,9 +3,11 @@ import sys
 from PySide6 import QtWidgets, QtGui
 
 from counter_app.AtomsView import AtomsView
+from counter_app.ViewController import ViewController
 from counter_app.ui_gen.ui_MainWindow import Ui_MainWindow
 
 from counter_app._version import __version__
+from counter_app.view_chanel_data import subscribe_view_changed
 
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -26,9 +28,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.atomsView = AtomsView(self.atomsViewArea)
 
+        view_controller = ViewController(self)
+        subscribe_view_changed(view_controller.show_view)
+
         # Show the version in the status bar
         self.statusbar.showMessage(f"Version v{__version__}")
-    
+
     def update_counter(self):
         self.label.setText(str(self.counter))
 
@@ -43,6 +48,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def reset(self):
         self.counter = 0
         self.update_counter()
+        self.atomsView.reset_view()
 
 
 if __name__ == '__main__':
@@ -51,4 +57,3 @@ if __name__ == '__main__':
     main = MainWindow()
     main.show()
     sys.exit(app.exec())
- 

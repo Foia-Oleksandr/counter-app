@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "counter-app"
-version = "1.1.1"
+version = "1.2.0"
 description = "Standalone app for click counter"
 authors = ["Oleksandr Foia <foia.alexander@gmail.com>"]
 license = "MIT"
@@ -17,6 +17,7 @@ packages = [
 python = ">=3.11,<3.14"
 pyinstaller = ">=6.16.0,<7.0.0"
 pyside6 = ">=6.10.0,<7.0.0"
+blinker = "^1.9.0"
 
 [tool.poetry.scripts]
 counter-app = "counter_app.main:main"

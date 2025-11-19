@@ -17,3 +17,4 @@ ui_gen/
 web_view_gen/
 /src/web_viewer/node_modules/
 /src/web_viewer/web_dist/
+/.run/
