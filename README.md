@@ -64,7 +64,35 @@ poe build
 
 Observe a binary file at the `dist` folder
 
-### Trigger pipeline for building distribution artifacts
+## 📦 Poe Tasks Overview
+
+The project defines several automation tasks using **Poe the Poet**, enabling easy execution of common development and build operations.
+
+### 🔧 Asset & UI Compilation
+- **`poe compile-qrc`** — Compile Qt resource collections into Python modules.
+- **`poe compile-ui`** — Convert `.ui` files into Python UI classes.
+- **`poe compile-web-assets`** — Build the web viewer (npm) and pack assets via `pyside6-rcc`.
+- **`poe compile-assets`** — Run all of the above in sequence.
+
+### 🧹 Cleaning and Building
+- **`poe clean`** — Run the custom cleanup script.
+- **`poe installer-build`** — Build a PyInstaller standalone binary.
+- **`poe build`** — Generate version + build installer.
+- **`poe clean-build`** — Clean, compile assets, then build.
+
+### 👣 Development Helpers
+- **`poe run`** — Run the Python app directly.
+- **`poe open-designer`** — Open Qt Designer.
+- **`poe lint`** — Run ruff linter.
+- **`poe lint_fix`** — Auto-fix lint issues + format code.
+- **`poe format`** — Apply formatting only.
+
+### 🚀 Release Pipeline
+- **`poe generate-version`** — Embed version information.
+- **`poe release`** — Create a Git tag for release.
+  - After running, push the tag manually to trigger CI/CD.
+
+## Trigger pipeline for building distribution artifacts
 
 - Validate that you bumped a release version in the `pyproject.toml` file.
 - Then run poe `release` goal for creating git tag.
@@ -116,7 +144,7 @@ Update package to the latest version
 poetry update numpy
 ```
 
-Downgrade/Upgrade to a specified package version 
+Downgrade/Upgrade to a specified package version
 ```shell
 poetry add numpy@1.26.4
 ```
@@ -125,3 +153,4 @@ List of available versions
 ```shell
 poetry search numpy
 ```
+

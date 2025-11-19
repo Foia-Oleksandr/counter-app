@@ -14,7 +14,7 @@
    <bool>false</bool>
   </property>
   <property name="windowTitle">
-   <string>Counter_todo</string>
+   <string>Counter with web 3D view</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../resources/resources.qrc">
